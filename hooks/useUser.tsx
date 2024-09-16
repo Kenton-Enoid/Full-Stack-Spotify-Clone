@@ -40,7 +40,7 @@ export const MyUserContextProvider = (props: Props) => {
         supabase
             .from('subscriptions')
             .select('*, prices(*, products(*))')
-            .in('status', ['trailing', 'active'])
+            .in('status', ['trialing', 'active'])
             .single();
     
     useEffect(() => {
@@ -69,7 +69,7 @@ export const MyUserContextProvider = (props: Props) => {
       }
     }, [user, isLoadingUser]);
 
-    const  value = {
+    const value = {
       accessToken,
       user,
       userDetails,
@@ -85,4 +85,7 @@ export const useUser = () => {
   if (context === undefined) {
     throw new Error('useUser must be used within a MyUserContextProvider');
   }
+  return context;
 }
+
+export default useUser;
