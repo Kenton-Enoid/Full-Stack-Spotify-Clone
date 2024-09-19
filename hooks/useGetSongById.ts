@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 
 import { Song } from "@/types";
@@ -29,6 +29,16 @@ const useGetSongById = (id?: string) => {
     }
 
     setSong(data as Song);
+    setIsLoading(false);
     }
-  }, []) 
+
+    fetchSong();
+  }, [id, supabaseClient]);
+  
+  return useMemo(() => ({
+    isLoading,
+    song
+  }), [isLoading, song])
 }
+
+export default useGetSongById;
