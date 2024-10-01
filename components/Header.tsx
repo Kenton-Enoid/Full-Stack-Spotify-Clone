@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
+import usePlayer from "@/hooks/usePlayer";
 
 import Button from "./Button";
 
@@ -23,14 +24,16 @@ const Header: React.FC<HeaderProps> = ({
   children,
   className
 }) => {
+  const player = usePlayer();
   const authModal = useAuthModal();
   const router = useRouter();
+
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
 
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
-    // TODO: Reset any playing
+    player.reset();
     router.refresh();
     
     if (error) {
