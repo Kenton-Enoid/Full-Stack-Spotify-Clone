@@ -17,7 +17,7 @@ const relevantEvents = new Set([
   'checkout.session.completed',
   'customer.subscription.created',
   'customer.subscription.updated',
-  'customer.subscrioption.deleted'
+  'customer.subscription.deleted'
 ]);
 
 export async function POST(
@@ -32,9 +32,14 @@ export async function POST(
   try {
     if (!sig || !webhookSecret) return;
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-  } catch (error: any) {
-    console.log('Error message: ' + error.message);
-    return new NextResponse(`Webhook Error: ${error.message}`, { status: 400 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log('Error message: ' + error.message);
+      return new NextResponse(`Webhook Error: ${error.message}`, { status: 400 });
+    } else {
+      console.log('Unknown error occurred', error);
+      return new NextResponse('Webhook Error', { status: 400 });
+    }
   }
 
   if (relevantEvents.has(event.type)) {
@@ -70,11 +75,15 @@ export async function POST(
           }
           break;
         default: 
-          throw new Error('Unhandled relevant event!')
+          throw new Error('Unhandled relevant event!');
       }
-    } catch (error) {
-      console.log(error)
-      return new NextResponse(`Webhook error`, { status: 400 });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log('Unknown error occurred', error);
+      }
+      return new NextResponse('Webhook error', { status: 400 });
     }
   }
 

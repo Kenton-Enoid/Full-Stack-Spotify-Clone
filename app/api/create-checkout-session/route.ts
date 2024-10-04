@@ -44,8 +44,12 @@ export async function POST(
     });
 
     return NextResponse.json({ sessionId: session.id });
-  } catch (error: any) {
-    console.log(error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log('Unknown error occurred', error);
+    }
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
