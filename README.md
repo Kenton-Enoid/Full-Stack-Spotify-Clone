@@ -1,24 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full Stack Spotify Clone 🎧
+
+A full-stack Spotify clone built with the latest technologies such as **Next.js 13.4**, **React**, **Stripe**, **Supabase**, **PostgreSQL**, and **Tailwind CSS**. This project demonstrates how to implement full-stack web applications using modern web development tools.
+
+## Features
+- **Authentication**: User authentication with Supabase.
+- **Music Streaming**: Allows users to search, play, and control music.
+- **Subscription Payments**: Integrates with **Stripe** for premium subscriptions.
+- **Responsive Design**: Mobile-friendly UI built with Tailwind CSS.
+  
+## Tech Stack
+- **Frontend**: Next.js 13.4, React, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL), Next.js API Routes
+- **Payments**: Stripe integration for subscription payments
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js >= 16.x
+- PostgreSQL
+- Stripe account for payment integration
+- Supabase account for database and authentication
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Kenton-Enoid/Full-Stack-Spotify-Clone.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Full-Stack-Spotify-Clone
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+   - Create a `.env.local` file in the root of the project and add the following:
+
+     ```
+     NEXT_PUBLIC_SUPABASE_URL=<your_supabase_url>
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key>
+     STRIPE_SECRET_KEY=<your_stripe_secret_key>
+     ```
+
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open your browser and visit:
+   ```
+   http://localhost:3000
+   ```
+
+### Project Structure
+
+```
+.
+├── components
+├── pages
+├── public
+├── styles
+├── utils
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
+Feel free to submit issues or pull requests for improvements. Collaboration is welcome!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Learn More
 
